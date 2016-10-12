@@ -18,6 +18,11 @@ module RushHour
       erb :sources
     end
 
+    get "/sources/" do
+      return (status 400) && not_found(page_not_found)
+      erb :error
+    end
+
     get "/login" do
       erb :login
     end
@@ -89,6 +94,10 @@ module RushHour
 
     def event_not_defined
       erb :event_not_defined_error
+    end
+    
+    def page_not_found
+      @error_message = "Please enter your user identifier before pressing access data."
     end
 
   end
