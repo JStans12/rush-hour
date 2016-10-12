@@ -60,7 +60,9 @@
 
     <form action="/sources/<%= @client.identifier %>" method="POST">
       <input type="hidden" name="_method" value="DELETE">
+      <p>Warning: this button will irrevocably delete your account!</p>
       <button class="button-styles btn btn-danger btn-xs" type="submit" value="delete">Delete</button>
+      
     </form>
 
   </div>
