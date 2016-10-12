@@ -55,7 +55,7 @@ module RushHour
       @url = Processor.rebuild(params[:identifier], params[:relative_path])
       @url_object = Url.find_by(url: @url)
       @client = Client.find_by(identifier: params[:identifier])
-      return not_found("path has not been requested.") if @client.urls.find_by(url: @url).nil?
+      return not_found("The entered path has not been requested by a user.") if @client.urls.find_by(url: @url).nil?
       erb :show_client_url
     end
 
@@ -81,7 +81,7 @@ module RushHour
     end
 
     def payload_missing
-      p "the damn payload is missing, bro"
+      p "This input is missing a payload. Please try again."
     end
 
     def payload_valid?(params, identifier)
@@ -89,7 +89,7 @@ module RushHour
     end
 
     def payload_invalid
-      p "the damn payload was already received or is invalid, bro"
+      p "The payload is invalid, please try again."
     end
 
     def event_not_defined
