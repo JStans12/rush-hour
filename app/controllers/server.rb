@@ -18,6 +18,11 @@ module RushHour
       erb :sources
     end
 
+    get "/sources/" do
+      return (status 400) && not_found(page_not_found)
+      erb :error
+    end
+
     get "/login" do
       erb :login
     end
@@ -50,7 +55,7 @@ module RushHour
       @url = Processor.rebuild(params[:identifier], params[:relative_path])
       @url_object = Url.find_by(url: @url)
       @client = Client.find_by(identifier: params[:identifier])
-      return not_found("path has not been requested.") if @client.urls.find_by(url: @url).nil?
+      return not_found("The entered path has not been requested by a user.") if @client.urls.find_by(url: @url).nil?
       erb :show_client_url
     end
 
@@ -76,7 +81,7 @@ module RushHour
     end
 
     def payload_missing
-      p "the damn payload is missing, bro"
+      p "This input is missing a payload. Please try again."
     end
 
     def payload_valid?(params, identifier)
@@ -84,11 +89,15 @@ module RushHour
     end
 
     def payload_invalid
-      p "the damn payload was already received or is invalid, bro"
+      p "The payload is invalid, please try again."
     end
 
     def event_not_defined
       erb :event_not_defined_error
+    end
+    
+    def page_not_found
+      @error_message = "Please enter your user identifier before pressing access data."
     end
 
   end

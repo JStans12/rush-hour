@@ -11,7 +11,7 @@ RSpec.describe "when a user visits /" do
   it "they see the access data button" do
 
     visit("/")
-    within("//div[@class='dashboard-form-style']") do
+    within("//div[@class='jumbotron row-centered form-inline']") do
     expect find_button("access data")
     end
   end
