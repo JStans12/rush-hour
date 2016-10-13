@@ -13,8 +13,8 @@ module RushHour
       erb :dashboard
     end
     
-    get "/experiment" do
-      erb :experiment
+    get "/sample_sender" do
+      erb :sample_sender
     end
 
     get "/sources" do
