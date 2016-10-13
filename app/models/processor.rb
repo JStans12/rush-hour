@@ -13,7 +13,13 @@ class Processor < ActiveRecord::Base
   end
 
   def self.parse(params, identifier)
-    params = JSON.parse(params)
+    if params.is_a?(String)
+      params = JSON.parse(params)
+    elsif params[:ajax]
+      params = params
+    else
+      params = JSON.parse(params)
+    end
     url = Url.find_or_create_by(url: params["url"])
     referred_by = ReferredBy.find_or_create_by(referred_by: params["referredBy"])
     request_type = RequestType.find_or_create_by(request_type: params["requestType"])
@@ -39,7 +45,13 @@ class Processor < ActiveRecord::Base
   end
 
   def self.validate_payload(params, identifier)
-    params = JSON.parse(params)
+    if params.is_a?(String)
+      params = JSON.parse(params)
+    elsif params[:ajax]
+      params = params
+    else
+      params = JSON.parse(params)
+    end    
     url = Url.find_or_create_by(url: params["url"])
     referred_by = ReferredBy.find_or_create_by(referred_by: params["referredBy"])
     request_type = RequestType.find_or_create_by(request_type: params["requestType"])
