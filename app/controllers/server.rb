@@ -12,6 +12,10 @@ module RushHour
     get "/" do
       erb :dashboard
     end
+    
+    get "/experiment" do
+      erb :experiment
+    end
 
     get "/sources" do
       status 200
