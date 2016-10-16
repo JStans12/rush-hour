@@ -43,7 +43,7 @@
       <tr>
         <td>List of URLs from most to least requested:</td>
         <% @client.urls.most_to_least_requested(@client.payloads).each do |client_url| %>
-        <tr><td><a href="<%= @client.identifier %>/urls/<%= Processor.uri_path(client_url) %>"><%= client_url %></a></td></tr>
+        <tr><td><a href="<%= @client.identifier %>/urls/<%= uri_parse(client_url) %>"><%= client_url %></a></td></tr>
         <% end %>
       </tr>
     </table>
@@ -89,9 +89,7 @@
         });
         }
     </pre></code>
-    </p>
-      
-      
+    </p>      
       
     </div>
 

@@ -1,5 +1,3 @@
-require_relative '../models/client'
-require_relative '../models/processor'
 require 'pry'
 
 module RushHour
@@ -14,11 +12,11 @@ module RushHour
     end
     
     get "/sample_sender" do
+      @payload_counter = Payload.all.count
       erb :sample_sender
     end
 
     get "/sources" do
-      status 200
       erb :sources
     end
 
@@ -103,6 +101,10 @@ module RushHour
     def page_not_found
       @error_message = "Please enter your user identifier before pressing access data."
     end
-
+  
+    def uri_parse(client_url)
+      URI.parse(client_url).path
+    end
+  
   end
 end
